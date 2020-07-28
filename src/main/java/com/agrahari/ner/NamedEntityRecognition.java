@@ -19,6 +19,7 @@ public class NamedEntityRecognition {
 
     public void nameFinder(String text){
         try {
+
             InputStream is = new FileInputStream("src\\main\\resources\\models\\en-ner-person.bin");
             TokenNameFinderModel model = new TokenNameFinderModel(is);
 
@@ -42,5 +43,6 @@ public class NamedEntityRecognition {
         NamedEntityRecognition ner = new NamedEntityRecognition();
         String sentence = "Indian Names could either Abhay or Ankit and other options are Charles and Michael";
         ner.nameFinder(sentence);
+
     }
 }
