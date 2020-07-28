@@ -33,6 +33,7 @@ public class RecognizePOS {
         POSTaggerME posObj = new POSTaggerME(model);
         WhitespaceTokenizer whitespaceTokenizer = WhitespaceTokenizer.INSTANCE;
         String[] tokens = whitespaceTokenizer.tokenize(sentence);
+
         String[] tags = posObj.tag(tokens);
 
         POSSample sample = new POSSample(tokens, tags);
@@ -49,7 +50,8 @@ public class RecognizePOS {
     }
 
     public static void main(String[] args) {
-        String input = "welcome Ankit to our class of natural language processing";
+
+        String input = "Welcome to DynamicallyBlunt, for our class of natural language processing.";
         RecognizePOS obj = new RecognizePOS();
         POSSample sample = obj.recognizePOS(input);
         obj.performanceMonitor(sample);
