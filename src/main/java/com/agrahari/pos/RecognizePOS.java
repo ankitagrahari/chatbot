@@ -1,5 +1,6 @@
 package com.agrahari.pos;
 
+import opennlp.tools.cmdline.PerformanceMonitor;
 import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSSample;
 import opennlp.tools.postag.POSTaggerME;
@@ -26,7 +27,7 @@ public class RecognizePOS {
         return null;
     }
 
-    public void recognizePOS(String sentence){
+    public POSSample recognizePOS(String sentence){
 
         POSModel model = loadModel();
         POSTaggerME posObj = new POSTaggerME(model);
@@ -36,11 +37,21 @@ public class RecognizePOS {
 
         POSSample sample = new POSSample(tokens, tags);
         System.out.println(sample.toString());
+
+        return sample;
+    }
+
+    public void performanceMonitor(POSSample sample){
+        PerformanceMonitor monitor = new PerformanceMonitor(System.err, "uploaded");
+        monitor.start();
+        monitor.incrementCounter();
+        monitor.stopAndPrintFinalResult();
     }
 
     public static void main(String[] args) {
-        String input = "welcome to our class of natural language processing";
+        String input = "welcome Ankit to our class of natural language processing";
         RecognizePOS obj = new RecognizePOS();
-        obj.recognizePOS(input);
+        POSSample sample = obj.recognizePOS(input);
+        obj.performanceMonitor(sample);
     }
 }
